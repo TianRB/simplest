@@ -19,7 +19,7 @@ class CategoryController extends Controller
     * @return \Illuminate\Http\Response
     */
     public function index(){
-        return view(Category::$viewPrefix.'.index', ['list' => Category::all()]);
+        return view(Category::$config['viewPrefix'].'.index', ['list' => Category::all()]);
     }
 
     /**
@@ -28,7 +28,7 @@ class CategoryController extends Controller
     * @return \Illuminate\Http\Response
     */
     public function create(){
-        return view(Category::$viewPrefix.'.create');
+        return view(Category::$config['viewPrefix'].'.create');
     }
 
     /**
@@ -44,7 +44,7 @@ class CategoryController extends Controller
         $m = new Category;
 
        // Rules
-        if ($m->isCatalog) { // Si es catalogo
+        if (Category::$config['isCatalog']) { // Si es catalogo
             $m->name = str_slug($input['display_name']);
             $rules = [
                 // 'name' => 'unique:Category|required|max:255',
@@ -60,7 +60,7 @@ class CategoryController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $m->fill($input)->save();
-            return redirect()->route(Category::$routePrefix.'.index')
+            return redirect()->route(Category::$config['routePrefix'].'.index')
                 ->with('message', 'Category creada');
         }
     }
@@ -72,7 +72,7 @@ class CategoryController extends Controller
     * @return \Illuminate\Http\Response
     */
     public function show($id){
-        return view(Category::$viewPrefix.'.show', ['m' => Category::find($id)]);
+        return view(Category::$config['viewPrefix'].'.show', ['m' => Category::find($id)]);
     }
 
     /**
@@ -82,7 +82,7 @@ class CategoryController extends Controller
     * @return \Illuminate\Http\Response
     */
     public function edit($id){
-        return view(Category::$viewPrefix.'.edit', ['m' => Category::find($id)]);
+        return view(Category::$config['viewPrefix'].'.edit', ['m' => Category::find($id)]);
     }
 
     /**
@@ -98,7 +98,7 @@ class CategoryController extends Controller
         $m = Category::find($id);
 
        // Rules
-        if ($m->isCatalog) { // Si es catalogo
+        if (Category::$config['isCatalog']) { // Si es catalogo
             $m->name = str_slug($input['display_name']);
             $rules = [
                 // 'name' => 'unique:Category|required|max:255',
@@ -115,7 +115,7 @@ class CategoryController extends Controller
         } else {
             $m->update($input);
             $m->save();
-            return redirect()->route(Category::$routePrefix.'.index')
+            return redirect()->route(Category::$config['routePrefix'].'.index')
                 ->with('message', 'Category actualizada');
         }
     }
@@ -129,7 +129,7 @@ class CategoryController extends Controller
     public function destroy($id){
         $m = Category::find($id);
         $m->delete();
-        return redirect()->route(Category::$routePrefix.'.index')
+        return redirect()->route(Category::$config['routePrefix'].'.index')
             ->with('message', 'Category eliminada');
     }
 }

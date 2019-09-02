@@ -9,11 +9,20 @@ class Category extends Model
     // Config
     protected $table = 'categories';
     protected $fillable = ['display_name', 'description'];
-    public static $viewPrefix = 'admin.categories'; // Vistas
-    public static $routePrefix = 'categories'; // Rutas
+    
+    public static $config = [
+        'viewPrefix' =>  'admin.categories',
+        'routePrefix' =>  'categories',
+        'isCatalog' =>  true, // Create name ffrom display_name
+        'hasImage' => false,
+          'imageColumn' => '',
+          'imageDirectory' => 'img/',
+        'hasMultipleImages' => 'img/',
+          'multipleImagesDirectory' => 'img/'
+    ];
 
-    public $isCatalog = true;
-    // public $hasImage = false;
-    // public $hasMultipleImages = false;
-
+    public function products()
+    {
+        return $this->belongsToMany('App\Product');
+    }
 }
