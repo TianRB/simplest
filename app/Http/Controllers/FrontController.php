@@ -23,6 +23,8 @@ class FrontController extends Controller
      */
     public function index()
     {
+        scandir(PUBLIC_PATH().'/img/');
         return view('welcome');
     }
+
 }

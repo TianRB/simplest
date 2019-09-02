@@ -44,16 +44,16 @@
 	--}}
 	<div class="wrapper">
 		@include('backend.layouts.sidebar')
-		<div class="main-panel">
 
-			{{--
-			|--------------------------------------------------------------------------
-			| Navigation
-			|--------------------------------------------------------------------------
-			--}}
-			<nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
+		{{--
+		|--------------------------------------------------------------------------
+		| Navigation
+		|--------------------------------------------------------------------------
+		--}}
+		{{-- <div class="row">
+			<nav class="row navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
 				<div class="container-fluid d-flex align-items-center">
-			    <div class="navbar-wrapper">
+					<div class="navbar-wrapper">
 						<div class="navbar-toggle">
 							<button type="button" class="navbar-toggler">
 								<span class="navbar-toggler-bar bar1"></span>
@@ -65,12 +65,15 @@
 					</div>
 				</div>
 			</nav>
+		</div> --}}
+
 		{{--
 		|--------------------------------------------------------------------------
 		| Content
 		|--------------------------------------------------------------------------
 		--}}
-			@yield('content')
+		<div class="main-panel">
+				@yield('content')
 		</div>
 	</div>
 

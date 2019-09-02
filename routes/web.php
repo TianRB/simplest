@@ -20,6 +20,10 @@ Route::get('/', 'FrontController@index')->name('landing');
 | Rutas de Backend
 */
 Route::get('/home', 'BackController@index')->name('home');
+Route::resources([
+  'categories' => 'CategoryController',
+]);
+
 /*// only users with roles that have the 'manage_posts' permission will be able to access any route within admin/post
 Entrust::routeNeedsPermission('admin/post*', 'create-post');
 
