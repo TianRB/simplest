@@ -5,7 +5,7 @@ Show de Tipos de Platillo
 @section('content')
 <a href="{{ route('tipos_platillo.index') }}">index</a>
   {{-- var_dump($tipoPlatillo) --}}
-  <p>{{ $tipoPlatillo->display_name }}</p>
+  <p>{{ $tipoPlatillo->name }}</p>
   <a href="{{ route('tipos_platillo.edit', $tipoPlatillo->id) }}">edit</a>
   <form action="{{ route('tipos_platillo.destroy', ['id' => $tipoPlatillo->id]) }}" method="POST" class="no-margin">
     {{ csrf_field() }}

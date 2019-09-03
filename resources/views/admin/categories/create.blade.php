@@ -9,8 +9,8 @@ Create categories
 <form action="{{ route('categories.store') }}" method="post">
   {{ csrf_field() }}
 
-  <label for="display_name">display_name</label>
-  <input type="text" name="display_name" value="{{ old('display_name') }}">
+  <label for="name">name</label>
+  <input type="text" name="name" value="{{ old('name') }}">
 
   <label for="description">description</label>
   <input type="text" name="description" value="{{ old('description') }}">

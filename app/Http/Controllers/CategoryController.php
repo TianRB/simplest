@@ -44,21 +44,23 @@ class CategoryController extends Controller
         $m = new Category;
 
        // Rules
-        if (Category::$config['isCatalog']) { // Si es catalogo
-            $m->name = str_slug($input['display_name']);
-            $rules = [
-                // 'name' => 'unique:Category|required|max:255',
-                'display_name' => 'required|max:255',
-                'description' => 'max:800'
-            ];
-        } else {
-            $rules = [];
-        }
 
-        $validator = Validator::make($input, $rules);
+
+        $validator = Validator::make($input, Category::$storeRules);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
+
+            if (Category::$config['hasSlug']) { // Si es catalogo
+                $m->slug = str_slug($input['name']);
+            } elseif (Category::$config['hasImage']) { // Si tiene imagen
+                $file = Input::file(Category::$config['imageColumn']);
+                $file_name = str_random(16).'.'.$file->getClientOriginalExtension();
+                $img_path = Category::$config['imageDirectory'].$file_name;
+                $request->image->move(Category::$config['imageDirectory'], $file_name);
+                $m->image = $img_path;
+            }
+
             $m->fill($input)->save();
             return redirect()->route(Category::$config['routePrefix'].'.index')
                 ->with('message', 'Category creada');
@@ -98,8 +100,8 @@ class CategoryController extends Controller
         $m = Category::find($id);
 
        // Rules
-        if (Category::$config['isCatalog']) { // Si es catalogo
-            $m->name = str_slug($input['display_name']);
+        if (Category::$config['hasSlug']) { // Si es catalogo
+            $m->slug = str_slug($input['name']);
             $rules = [
                 // 'name' => 'unique:Category|required|max:255',
                 'display_name' => 'required|max:255',

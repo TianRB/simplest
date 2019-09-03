@@ -10,8 +10,8 @@ Edit Categoria
     {{ csrf_field() }}
     <input type="hidden" name="_method" value="PUT" />
 
-    <label for="display_name">display_name</label>
-    <input type="text" name="display_name" value="{{ $m->display_name }}">
+    <label for="name">name</label>
+    <input type="text" name="name" value="{{ $m->name }}">
 
     <label for="description">description</label>
     <input type="text" name="description" value="{{ $m->description }}">

@@ -15,8 +15,15 @@ class Migrations extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
-            $table->string('display_name')->nullable();
+            $table->string('slug')->unique();
+            $table->string('name')->nullable();
+            $table->longText('description')->nullable();
+            $table->timestamps();
+        });
+        Schema::create('products', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('slug')->unique();
+            $table->string('name')->nullable();
             $table->longText('description')->nullable();
             $table->timestamps();
         });

@@ -14,7 +14,7 @@ Index Categorias
     <a href="{{ route('categories.create') }}">create</a>
     @forelse ($list as $m)
       {{-- var_dump($m) --}}
-      <p>{{ $m->display_name }}</p>
+      <p>{{ $m->name }}</p>
       <a href="{{ route('categories.show', $m->id) }}">show</a>
       <a href="{{ route('categories.edit', $m->id) }}">edit</a>
       <form action="{{ route('categories.destroy', ['id' => $m->id]) }}" method="POST" class="no-margin">
